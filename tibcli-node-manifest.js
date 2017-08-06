@@ -1,0 +1,96 @@
+var cli = require('commander');
+var fs = require('fs');
+var path = require('path');
+
+cli
+    .option('-N, --name <name>', 'The name of the variable to add or remove')
+    .option('-T, --type <type>', 'The type of the variable to add')
+
+cli
+    .command('add-var')
+    .description('Add an environment variable to the manifest.json')
+    .action(function (options) {
+        if (cli.name == null || cli.type == null) {
+            console.error(' ');
+            console.error('Name and Type were not specified!');
+            console.error(' ');
+            process.exit();
+        }
+        parseManifest('add', cli.name, cli.type)
+    })
+
+cli
+    .command('rem-var')
+    .description('Removes an environment variable from the manifest.json')
+    .action(function (options) {
+        if (cli.name == null) {
+            console.error(' ');
+            console.error('Name not specified!');
+            console.error(' ');
+            process.exit();
+        }
+        parseManifest('remove', cli.name)
+    })
+
+
+cli.parse(process.argv);
+
+function parseManifest(action, name, type) {
+    var manifestFile = '';
+
+    if (fs.existsSync(process.cwd() + path.sep + 'manifest.json')) {
+        manifestFile = process.cwd() + path.sep + 'manifest.json'
+    } else {
+        console.error(' ');
+        console.error('Cannot find a manifest.json file in this folder!');
+        console.error('Cannot complete this action');
+        console.error(' ');
+        process.exit();
+    }
+
+    var manifestContent = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
+    var propertiesSection = manifestContent.properties
+
+    if (action == 'add') {
+        if (propertiesSection == null) {
+            propertiesSection = [];
+        }
+        var newProp = JSON.parse('{"name" : "' + name + '","datatype" : "' + type + '","default" : ""}')
+        propertiesSection.push(newProp);
+        console.log(' ');
+        console.log('Successfully added environment variable from manifest.json!');
+        console.log(' ');
+    } else {
+        if (propertiesSection == null) {
+            console.error(' ');
+            console.error('The manifest has no properties section!');
+            console.error(' ');
+            process.exit();
+        } else {
+            var found = false;
+            for (i = 0; i <= propertiesSection.length - 1; i++) {
+                if (propertiesSection[i].name == name) {
+                    removeFromArrayByIndex(propertiesSection, i)
+                    found = true;
+                }
+            }
+            if (found) {
+                console.log(' ');
+                console.log('Successfully removed environment variable from manifest.json!');
+                console.log(' ');
+            } else {
+                console.error(' ');
+                console.error('The manifest has no environment variable with the name ' + name + '!');
+                console.error(' ');
+            }
+        }
+    }
+
+    manifestContent.properties = propertiesSection
+
+    fs.writeFileSync(manifestFile, JSON.stringify(manifestContent), 'utf8');
+}
+
+function removeFromArrayByIndex(array, index) {
+    array.splice(index, 1);
+}
