@@ -5,6 +5,7 @@ var path = require('path');
 cli
     .option('-N, --name <name>', 'The name of the variable to add or remove')
     .option('-T, --type <type>', 'The type of the variable to add')
+    .option('-f --file [file]','The full path of the manifest file, if no file is given we assume the file is in this folder')
 
 cli
     .command('add-var')
@@ -38,9 +39,13 @@ cli.parse(process.argv);
 function parseManifest(action, name, type) {
     var manifestFile = '';
 
-    if (fs.existsSync(process.cwd() + path.sep + 'manifest.json')) {
-        manifestFile = process.cwd() + path.sep + 'manifest.json'
+    if(cli.file != null) {
+        manifestFile = cli.file
     } else {
+        manifestFile = process.cwd() + path.sep + 'manifest.json'
+    }
+
+    if (!fs.existsSync(cli.file)) {
         console.error(' ');
         console.error('Cannot find a manifest.json file in this folder!');
         console.error('Cannot complete this action');

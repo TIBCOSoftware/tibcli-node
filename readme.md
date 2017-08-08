@@ -1,6 +1,12 @@
 # tibcli-node
 A command line tool to help developers with Node.js code on TIBCO Cloud Integration
 
+## Install
+You can install by downloading the .tgz file from the releases folder
+```
+$ npm install -g tibcli-node-0.0.2.tgz
+```
+
 ## Usage
 ```
 Usage: tibcli-node [options] [command]
@@ -39,6 +45,7 @@ Options:
 
   -N, --name <name>  The name of the variable to add or remove
   -T, --type <type>  The type of the variable to add
+  -f --file [file]   The full path of the manifest file, if no file is given we assume the file is in this folder
   -h, --help         output usage information
 
 Commands:
