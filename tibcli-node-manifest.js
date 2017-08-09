@@ -45,7 +45,7 @@ function parseManifest(action, name, type) {
         manifestFile = process.cwd() + path.sep + 'manifest.json'
     }
 
-    if (!fs.existsSync(cli.file)) {
+    if (!fs.existsSync(manifestFile)) {
         console.error(' ');
         console.error('Cannot find a manifest.json file in this folder!');
         console.error('Cannot complete this action');

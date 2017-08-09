@@ -4,7 +4,7 @@ A command line tool to help developers with Node.js code on TIBCO Cloud Integrat
 ## Install
 You can install by downloading the .tgz file from the releases folder
 ```
-$ npm install -g tibcli-node-0.0.2.tgz
+$ npm install -g tibcli-node-0.1.0.tgz
 ```
 
 ## Usage

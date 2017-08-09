@@ -1,6 +1,6 @@
 {
   "name": "tibcli-node",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Help developers with Node.js code on TIBCO Cloud Integration",
   "main": "tibcli-node.js",
   "scripts": {
