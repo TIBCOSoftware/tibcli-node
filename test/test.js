@@ -10,7 +10,7 @@ var fs = require('fs.extra');
 var path = require('path');
 var templates = require('../tibcli-node-templates');
 
-var VERSION = '0.1.0';
+var mod = require('../package.json');
 var TEST_DIR = './testapp';
 
 describe('File & Folder layout', function () {
@@ -66,9 +66,9 @@ describe('File & Folder layout', function () {
 
 describe('tibcli-node.js', function () {
     this.slow(10000);
-    it('should be version ' + VERSION, () => {
+    it('should be version ' + mod.version, () => {
         var result = spawnSync('node', ['tibcli-node', '--version'], { encoding: 'utf-8' });
-        expect(result.stdout).to.include(VERSION);
+        expect(result.stdout).to.include(mod.version);
     });
     it('should contain generate and manifest functions', () => {
         var result = spawnSync('node', ['tibcli-node', '--help'], { encoding: 'utf-8' });
