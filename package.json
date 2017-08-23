@@ -1,6 +1,6 @@
 {
   "name": "tibcli-node",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Help developers with Node.js code on TIBCO Cloud Integration",
   "main": "tibcli-node.js",
   "scripts": {
@@ -10,6 +10,9 @@
   "license": "see license in license.txt",
   "bugs": {
     "url": "https://github.com/TIBCOSoftware/tibcli-node/issues"
+  },
+  "bin": {
+    "tibcli-node": "./tibcli-node.js"
   },
   "homepage": "https://github.com/TIBCOSoftware/tibcli-node",
   "repository": {

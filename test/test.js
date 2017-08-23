@@ -21,45 +21,35 @@ describe('File & Folder layout', function () {
         expect(fs.existsSync('tibcli-node-templates.js')).to.be.true;
     });
     describe('File generation templates', function () {
-        describe('.env template', function () {
-            it('dotenv is a string', function () {
-                if (assert.isString(templates.dotenv)) {
-                    throw ('templates.dotenv does not return a string');
-                }
-            });
-            it('dotenv contains the http port 8000', function () {
-                if (assert.notEqual(templates.dotenv.indexOf('HTTP_PORT=8000'), -1)) {
-                    throw ('the http port is not set to 8000');
-                }
-            });
+        it('dotenv is a string', function () {
+            if (assert.isString(templates.dotenv)) {
+                throw ('templates.dotenv does not return a string');
+            }
         });
-        describe('server.js template', function () {
-            it('server.js is a string', function () {
-                if (assert.isString(templates.serverjs)) {
-                    throw ('templates.serverjs does not return a string');
-                }
-            });
+        it('dotenv contains the http port 8000', function () {
+            if (assert.notEqual(templates.dotenv.indexOf('HTTP_PORT=8000'), -1)) {
+                throw ('the http port is not set to 8000');
+            }
         });
-        describe('package.json template', function () {
-            it('package.json is a string', function () {
-                if (assert.isString(templates.packagejson)) {
-                    throw ('templates.packagejson does not return a string');
-                }
-            });
+        it('server.js is a string', function () {
+            if (assert.isString(templates.serverjs)) {
+                throw ('templates.serverjs does not return a string');
+            }
         });
-        describe('manifest.json template', function () {
-            it('manifest.json is a string', function () {
-                if (assert.isString(templates.manifestjson)) {
-                    throw ('templates.manifestjson does not return a string');
-                }
-            });
+        it('package.json is a string', function () {
+            if (assert.isString(templates.packagejson)) {
+                throw ('templates.packagejson does not return a string');
+            }
         });
-        describe('logger.js template', function () {
-            it('logger.js is a string', function () {
-                if (assert.isString(templates.loggerjs)) {
-                    throw ('templates.loggerjs does not return a string');
-                }
-            });
+        it('manifest.json is a string', function () {
+            if (assert.isString(templates.manifestjson)) {
+                throw ('templates.manifestjson does not return a string');
+            }
+        });
+        it('logger.js is a string', function () {
+            if (assert.isString(templates.loggerjs)) {
+                throw ('templates.loggerjs does not return a string');
+            }
         });
     });
 });
@@ -130,7 +120,7 @@ describe('tibcli-node-generate.js', function () {
     });
 });
 
-describe('Generate app and alter manifest', function () {
+describe('Generate app and update manifest', function () {
     this.slow(10000);
     before(function () {
         fs.mkdirSync(TEST_DIR);
