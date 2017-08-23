@@ -85,12 +85,12 @@ cli
         } else if (/^darwin/.test(process.platform)) {
             
             var spawn = require("child_process").spawn, child;
-            child = spawn("zip", ['-r -X ' + appRootFolder + '/../deployment/app.zip ' + appRootFolder + ' -x "node_modules"']);
+            child = spawn("zip", ['-r','-X',appRootFolder + '/../deployment/app.zip',appRootFolder,'-x','"node_modules"']);
             child.stdout.on("data", function (data) {
-                console.log("Powershell Data: " + data);
+                console.log("Bash Data: " + data);
             });
             child.stderr.on("data", function (data) {
-                console.log("Powershell Errors: " + data);
+                console.log("Bash Errors: " + data);
             });
             child.stdin.end();
 
