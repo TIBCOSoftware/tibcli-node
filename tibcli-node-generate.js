@@ -6,7 +6,7 @@
 
 var cli = require('commander');
 var templates = require('./tibcli-node-templates');
-var fs = require('fs.extra');
+var fs = require('fs-extra');
 
 cli
     .option('-N, --name <name>', 'The name of the app')
@@ -59,51 +59,24 @@ cli
         }
         if (appRootFolder == process.cwd()) {
             var parentFolder = appRootFolder.substring(0, appRootFolder.lastIndexOf('\\'));
-            fs.mkdirSync(parentFolder + '/deployment');
+            fs.mkdirsSync(parentFolder + '/deployment');
         } else {
-            fs.mkdirSync(process.cwd() + '/deployment');
+            fs.mkdirsSync(process.cwd() + '/deployment');
         }
-        fs.copy(appRootFolder + '/../manifest.json', appRootFolder + '/../deployment/manifest.json', function (err) {
-            if (err) {
-                throw err;
-            }
-        });
+
+        fs.copySync(appRootFolder + '/../manifest.json', appRootFolder + '/../deployment/manifest.json', { overwrite: true });
+
+        var spawn = require("child_process").spawn, child;
+        var child = null;
 
         if (/^win/.test(process.platform)) {
-            var spawn = require("child_process").spawn, child;
-            child = spawn("powershell.exe", ['Get-ChildItem ' + appRootFolder + ' | where { $_.Name -notin "node_modules"} | Compress-Archive -DestinationPath ' + appRootFolder + '/../deployment/app.zip -Force']);
-            child.stdout.on("data", function (data) {
-                console.log("Powershell Data: " + data);
-            });
-            child.stderr.on("data", function (data) {
-                console.log("Powershell Errors: " + data);
-            });
-            child.stdin.end();
-
+            child = spawn("powershell.exe", ['Get-ChildItem ' + appRootFolder + ' | where { $_.Name -notin "node_modules"} | Compress-Archive -DestinationPath ' + appRootFolder + '/../deployment/app.zip -Force'], { cwd: appRootFolder });
             console.log('Deployment folder and artifacts created!');
         } else if (/^darwin/.test(process.platform)) {
-            var spawn = require("child_process").spawn, child;
-            child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"']);
-            child.stdout.on("data", function (data) {
-                console.log("Bash Data: " + data);
-            });
-            child.stderr.on("data", function (data) {
-                console.log("Bash Errors: " + data);
-            });
-            child.stdin.end();
-
+            child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"'], { cwd: appRootFolder });
             console.log('Deployment folder and artifacts created!');
         } else if (/^linux/.test(process.platform)) {
-            var spawn = require("child_process").spawn, child;
-            child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"']);
-            child.stdout.on("data", function (data) {
-                console.log("Bash Data: " + data);
-            });
-            child.stderr.on("data", function (data) {
-                console.log("Bash Errors: " + data);
-            });
-            child.stdin.end();
-
+            child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"'], { cwd: appRootFolder });
             console.log('Deployment folder and artifacts created!');
         } else {
             console.error(' ');
@@ -111,6 +84,14 @@ cli
             console.error(' ');
             process.exit();
         }
+
+        child.stdout.on("data", function (data) {
+            console.log(data);
+        });
+        child.stderr.on("data", function (data) {
+            console.error(data);
+        });
+        child.stdin.end();
     })
 
 

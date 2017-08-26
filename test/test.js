@@ -6,7 +6,7 @@
 var assert = require('chai').assert;
 var expect = require('chai').expect;
 var spawnSync = require('child_process').spawnSync;
-var fs = require('fs.extra');
+var fs = require('fs-extra');
 var path = require('path');
 var templates = require('../tibcli-node-templates');
 
