@@ -78,6 +78,14 @@ Commands:
   app   Generate a new Node.js application
   zip   Generates a deployment folder with manifest.json and app.zip
 ```
+
+## Other TIBCO Cloud Integration repos
+You might also want to visit our other repos
+* [tci-awesome](https://github.com/TIBCOSoftware/tci-awesome), a curated set of awesome projects built on TIBCO Cloud Integration
+* [Connectors for TIBCO Business Studio - Cloud Edition](https://github.com/TIBCOSoftware/tci-studio-samples)
+* [tci-webintegrator](https://github.com/TIBCOSoftware/tci-webintegrator), the SDK to build cool extensions for our Web Integrator
+* [Visual Studio Code extension for Node.js](https://github.com/TIBCOSoftware/vscode-extension-tci)
+
 ## Contributors
 [Leon Stigter](https://github.com/retgits)
 
