@@ -4,52 +4,55 @@
  * in the license file that is distributed with this file.
  */
 
-var cli = require('commander');
-var templates = require('./tibcli-node-templates');
-var fs = require('fs-extra');
+/* eslint-disable max-len */
+
+const cli = require('commander');
+const templates = require('./tibcli-node-templates');
+const fs = require('fs-extra');
 
 cli
     .option('-N, --name <name>', 'The name of the app')
-    .option('-v, --appversion <version>', 'The version of the app')
+    .option('-v, --appversion <version>', 'The version of the app');
 
 cli
     .command('app')
     .description('Generate a new Node.js application')
-    .action(function (options) {
+    .action(function(options) {
         if (cli.name == null || cli.appversion == null) {
             console.error(' ');
             console.error('Name and Version were not specified!');
             console.error(' ');
             process.exit();
         }
-        manifestContent = templates.manifestjson
+
+        let manifestContent = templates.manifestjson;
         manifestContent = manifestContent.replace(/%%APPNAME%%/g, cli.name);
         manifestContent = manifestContent.replace(/%%APPVERSION%%/g, cli.appversion);
         fs.writeFileSync(process.cwd() + '/manifest.json', manifestContent, 'utf-8');
 
-        fs.mkdirSync(process.cwd() + '/' + cli.name);
-        fs.mkdirSync(process.cwd() + '/' + cli.name + '/util');
+        fs.mkdirsSync(process.cwd() + '/' + cli.name);
+        fs.mkdirsSync(process.cwd() + '/' + cli.name + '/util');
 
-        packageJsonContent = templates.packagejson
+        let packageJsonContent = templates.packagejson;
         packageJsonContent = packageJsonContent.replace(/%%APPNAME%%/g, cli.name);
         packageJsonContent = packageJsonContent.replace(/%%APPVERSION%%/g, cli.appversion);
         fs.writeFileSync(process.cwd() + '/' + cli.name + '/package.json', packageJsonContent, 'utf-8');
 
-        loggerJsContent = templates.loggerjs
+        let loggerJsContent = templates.loggerjs;
         fs.writeFileSync(process.cwd() + '/' + cli.name + '/util/logger.js', loggerJsContent, 'utf-8');
 
-        configContent = templates.dotenv
+        let configContent = templates.dotenv;
         fs.writeFileSync(process.cwd() + '/' + cli.name + '/.env', configContent, 'utf-8');
 
-        serverJsContent = templates.serverjs
+        let serverJsContent = templates.serverjs;
         fs.writeFileSync(process.cwd() + '/' + cli.name + '/server.js', serverJsContent, 'utf-8');
-    })
+    });
 
 cli
     .command('zip')
     .description('Generates a deployment folder with manifest.json and app.zip')
-    .action(function (options) {
-        var appRootFolder = determineAppRootFolder()
+    .action(function(options) {
+        let appRootFolder = determineAppRootFolder();
 
         if (appRootFolder == null) {
             console.error(' ');
@@ -58,25 +61,25 @@ cli
             process.exit();
         }
         if (appRootFolder == process.cwd()) {
-            var parentFolder = appRootFolder.substring(0, appRootFolder.lastIndexOf('\\'));
+            let parentFolder = appRootFolder.substring(0, appRootFolder.lastIndexOf('\\'));
             fs.mkdirsSync(parentFolder + '/deployment');
         } else {
             fs.mkdirsSync(process.cwd() + '/deployment');
         }
 
-        fs.copySync(appRootFolder + '/../manifest.json', appRootFolder + '/../deployment/manifest.json', { overwrite: true });
+        fs.copySync(appRootFolder + '/../manifest.json', appRootFolder + '/../deployment/manifest.json', {overwrite: true});
 
-        var spawn = require("child_process").spawn, child;
-        var child = null;
+        let spawn = require('child_process').spawn;
+        let child = null;
 
         if (/^win/.test(process.platform)) {
-            child = spawn("powershell.exe", ['Get-ChildItem ' + appRootFolder + ' | where { $_.Name -notin "node_modules"} | Compress-Archive -DestinationPath ' + appRootFolder + '/../deployment/app.zip -Force'], { cwd: appRootFolder });
+            child = spawn('powershell.exe', ['Get-ChildItem ' + appRootFolder + ' | where { $_.Name -notin "node_modules"} | Compress-Archive -DestinationPath ' + appRootFolder + '/../deployment/app.zip -Force'], {cwd: appRootFolder});
             console.log('Deployment folder and artifacts created!');
         } else if (/^darwin/.test(process.platform)) {
-            child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"'], { cwd: appRootFolder });
+            child = spawn('zip', ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"'], {cwd: appRootFolder});
             console.log('Deployment folder and artifacts created!');
         } else if (/^linux/.test(process.platform)) {
-            child = spawn("zip", ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"'], { cwd: appRootFolder });
+            child = spawn('zip', ['-r', '-X', appRootFolder + '/../deployment/app.zip', appRootFolder, '-x', '"node_modules"'], {cwd: appRootFolder});
             console.log('Deployment folder and artifacts created!');
         } else {
             console.error(' ');
@@ -85,14 +88,14 @@ cli
             process.exit();
         }
 
-        child.stdout.on("data", function (data) {
+        child.stdout.on('data', function(data) {
             console.log(data);
         });
-        child.stderr.on("data", function (data) {
+        child.stderr.on('data', function(data) {
             console.error(data);
         });
         child.stdin.end();
-    })
+    });
 
 
 cli.parse(process.argv);
@@ -100,18 +103,19 @@ cli.parse(process.argv);
 /**
  * Determines the rootfolder of the Node.js app
  * This is determined by which folder contains server.js
+ * @return {String} appRootFolder
  */
 function determineAppRootFolder() {
-    var appRootFolder = null;
+    let appRootFolder = null;
     if (fs.existsSync(process.cwd() + '/server.js')) {
         appRootFolder = process.cwd();
     }
 
-    var dirs = fs.readdirSync(process.cwd()).filter(function (file) {
+    let dirs = fs.readdirSync(process.cwd()).filter(function(file) {
         return fs.statSync(process.cwd() + '/' + file).isDirectory();
     });
 
-    dirs.forEach(function (element) {
+    dirs.forEach(function(element) {
         if (fs.existsSync(process.cwd() + '/' + element + '/server.js')) {
             appRootFolder = process.cwd() + '/' + element;
         }

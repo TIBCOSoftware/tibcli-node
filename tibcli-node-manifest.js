@@ -4,51 +4,59 @@
  * in the license file that is distributed with this file.
  */
 
-var cli = require('commander');
-var fs = require('fs');
-var path = require('path');
+/* eslint-disable max-len */
+
+const cli = require('commander');
+const fs = require('fs');
+const path = require('path');
 
 cli
     .option('-N, --name <name>', 'The name of the variable to add or remove')
     .option('-T, --type <type>', 'The type of the variable to add')
-    .option('-f --file [file]','The full path of the manifest file, if no file is given we assume the file is in this folder')
+    .option('-f --file [file]', 'The full path of the manifest file, if no file is given we assume the file is in this folder');
 
 cli
     .command('add-var')
     .description('Add an environment variable to the manifest.json')
-    .action(function (options) {
+    .action(function(options) {
         if (cli.name == null || cli.type == null) {
             console.error(' ');
             console.error('Name and Type were not specified!');
             console.error(' ');
             process.exit();
         }
-        parseManifest('add', cli.name, cli.type)
-    })
+        parseManifest('add', cli.name, cli.type);
+    });
 
 cli
     .command('rem-var')
     .description('Removes an environment variable from the manifest.json')
-    .action(function (options) {
+    .action(function(options) {
         if (cli.name == null) {
             console.error(' ');
             console.error('Name not specified!');
             console.error(' ');
             process.exit();
         }
-        parseManifest('remove', cli.name)
-    })
+        parseManifest('remove', cli.name);
+    });
 
 
 cli.parse(process.argv);
 
+/**
+ * Function to parse the manifest and depending on the action remove or add the variable
+ * @param {String} action 
+ * @param {String} name 
+ * @param {String} type 
+ */
 function parseManifest(action, name, type) {
-    var manifestFile = '';
+    let manifestFile = '';
 
-    if(cli.file != null) {
-        manifestFile = cli.file
+    if (cli.file != null) {
+        manifestFile = cli.file;
     } else {
-        manifestFile = process.cwd() + path.sep + 'manifest.json'
+        manifestFile = process.cwd() + path.sep + 'manifest.json';
     }
 
     if (!fs.existsSync(manifestFile)) {
@@ -59,14 +67,14 @@ function parseManifest(action, name, type) {
         process.exit();
     }
 
-    var manifestContent = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
-    var propertiesSection = manifestContent.properties
+    let manifestContent = JSON.parse(fs.readFileSync(manifestFile, 'utf8'));
+    let propertiesSection = manifestContent.properties;
 
     if (action == 'add') {
         if (propertiesSection == null) {
             propertiesSection = [];
         }
-        var newProp = JSON.parse('{"name" : "' + name + '","datatype" : "' + type + '","default" : ""}')
+        let newProp = JSON.parse('{"name" : "' + name + '","datatype" : "' + type + '","default" : ""}');
         propertiesSection.push(newProp);
         console.log(' ');
         console.log('Successfully added environment variable from manifest.json!');
@@ -78,10 +86,10 @@ function parseManifest(action, name, type) {
             console.error(' ');
             process.exit();
         } else {
-            var found = false;
-            for (i = 0; i <= propertiesSection.length - 1; i++) {
+            let found = false;
+            for (let i = 0; i <= propertiesSection.length - 1; i++) {
                 if (propertiesSection[i].name == name) {
-                    removeFromArrayByIndex(propertiesSection, i)
+                    removeFromArrayByIndex(propertiesSection, i);
                     found = true;
                 }
             }
@@ -97,11 +105,16 @@ function parseManifest(action, name, type) {
         }
     }
 
-    manifestContent.properties = propertiesSection
+    manifestContent.properties = propertiesSection;
 
     fs.writeFileSync(manifestFile, JSON.stringify(manifestContent), 'utf8');
 }
 
+/**
+ * Removes a particular index from the array
+ * @param {*} array 
+ * @param {*} index 
+ */
 function removeFromArrayByIndex(array, index) {
     array.splice(index, 1);
 }

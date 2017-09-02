@@ -1,10 +1,11 @@
 {
   "name": "tibcli-node",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Help developers with Node.js code on TIBCO Cloud Integration",
   "main": "tibcli-node.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "linter": "node_modules/.bin/eslint *.js"
   },
   "author": "retgits",
   "license": "see license in license.txt",
@@ -25,6 +26,8 @@
   },
   "devDependencies": {
     "chai": "^4.1.1",
+    "eslint": "^4.6.0",
+    "eslint-config-google": "^0.9.1",
     "mocha": "^3.5.0"
   }
 }
