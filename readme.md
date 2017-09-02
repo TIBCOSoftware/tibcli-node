@@ -1,7 +1,7 @@
 # tibcli-node
 
 ![](https://travis-ci.org/TIBCOSoftware/tibcli-node.svg)
-![](https://img.shields.io/badge/release-v0.2.3-blue.svg)
+![](https://img.shields.io/badge/release-v0.3.0-blue.svg)
 ![](https://img.shields.io/badge/dependencies-up%20to%20date-green.svg)
 ![](https://img.shields.io/badge/license-BSD%20style-blue.svg)
 
@@ -83,7 +83,7 @@ Commands:
   rem-var   Removes an environment variable from the manifest.json
 ```
 ## Generate
-Helps you create a completely new Node.js app or helps to speed up deployment by creating the zip and moving that, together with the manifest.json file, into a deployment folder
+Helps you create a completely new Node.js app or helps to speed up deployment by creating the zip and moving that, together with the manifest.json file, into a deployment folder. Optionally you can specify `-g` to initialize the directory as an empty repository or speficy `-G` to also create a GitHub repo for the app (you'll be prompted for your GitHub access token).
 ### Generate a new Node.js app
 ```
 $ tibcli-node generate app -N MyApp -v 1.0.0
@@ -100,6 +100,8 @@ Options:
 
   -N, --name <name>           The name of the app
   -v, --appversion <version>  The version of the app
+  -g, --git                   Initialize an empty git repo
+  -G, --github                Create a new GitHub repo (you'll be promted for a token)
   -h, --help                  output usage information
 
 Commands:

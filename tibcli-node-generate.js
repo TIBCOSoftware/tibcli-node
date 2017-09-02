@@ -12,7 +12,9 @@ const fs = require('fs-extra');
 
 cli
     .option('-N, --name <name>', 'The name of the app')
-    .option('-v, --appversion <version>', 'The version of the app');
+    .option('-v, --appversion <version>', 'The version of the app')
+    .option('-g, --git', 'Initialize an empty git repo')
+    .option('-G, --github', 'Create a new GitHub repo (you\'ll be promted for a token)');
 
 cli
     .command('app')
@@ -46,6 +48,35 @@ cli
 
         let serverJsContent = templates.serverjs;
         fs.writeFileSync(process.cwd() + '/' + cli.name + '/server.js', serverJsContent, 'utf-8');
+
+        if (cli.git || cli.github) {
+            let simpleGit = require('simple-git')(process.cwd());
+            simpleGit.init();
+            if (cli.github) {
+                let GitHubApi = require('github');
+                let github = new GitHubApi({});
+
+                let readline = require('readline');
+                const rl = readline.createInterface({
+                  input: process.stdin,
+                  output: process.stdout,
+                });
+
+                rl.question('Please paste the access key of your GitHub account: ', (answer) => {
+                  github.authenticate({
+                        type: 'token',
+                        token: answer,
+                    });
+                    github.repos.create({
+                        name: cli.name,
+                    }, function(err, res) {
+                        console.log(res.data.html_url);
+                        simpleGit.addRemote('origin', res.data.html_url);
+                    });
+                  rl.close();
+                });
+            }
+        }
     });
 
 cli

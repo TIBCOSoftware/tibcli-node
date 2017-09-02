@@ -12,6 +12,7 @@ var templates = require('../tibcli-node-templates');
 
 var mod = require('../package.json');
 var TEST_DIR = './testapp';
+var TEST_DIR_GIT = './testgitapp';
 
 describe('File & Folder layout', function () {
     it('has required files', function () {
@@ -153,5 +154,25 @@ describe('Generate app and update manifest', function () {
     });
     after(function () {
         fs.removeSync(TEST_DIR);
+    });
+});
+
+// Due to security contraints we'll only test the local repo creation
+describe('Generate app and initialize an empty git repo', function () {
+    this.slow(10000);
+    before(function () {
+        fs.mkdirSync(TEST_DIR_GIT);
+    });
+    it('should generate an app', () => {
+        var result = spawnSync('node', ['../tibcli-node-generate', 'app', '-N', 'myapp', '-v', '1.0.0', '-g'], { cwd: './testgitapp', encoding: 'utf-8' });
+        expect(fs.existsSync(TEST_DIR_GIT + '/manifest.json')).to.be.true;
+        expect(fs.existsSync(TEST_DIR_GIT + '/myapp/server.js')).to.be.true;
+        expect(fs.existsSync(TEST_DIR_GIT + '/myapp/package.json')).to.be.true;
+        expect(fs.existsSync(TEST_DIR_GIT + '/myapp/.env')).to.be.true;
+        expect(fs.existsSync(TEST_DIR_GIT + '/myapp/util/logger.js')).to.be.true;
+        expect(fs.existsSync(TEST_DIR_GIT + '/.git')).to.be.true;
+    });
+    after(function () {
+        fs.removeSync(TEST_DIR_GIT);
     });
 });
