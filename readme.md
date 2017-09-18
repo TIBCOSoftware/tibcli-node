@@ -1,7 +1,7 @@
 # tibcli-node
 
 ![](https://travis-ci.org/TIBCOSoftware/tibcli-node.svg)
-![](https://img.shields.io/badge/release-v0.3.0-blue.svg)
+![](https://img.shields.io/badge/release-v0.3.1-blue.svg)
 ![](https://img.shields.io/badge/dependencies-up%20to%20date-green.svg)
 ![](https://img.shields.io/badge/license-BSD%20style-blue.svg)
 
