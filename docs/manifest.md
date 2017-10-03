@@ -9,7 +9,7 @@ Options:
 
   -N, --name <name>    The name of the variable to add or remove
   -T, --type <type>    The type of the variable to add
-  -V, --value <value>  The default value for the variable in the manifest, you still need to explicitly set the value in your code
+  -v, --value <value>  The default value for the variable in the manifest, you still need to explicitly set the value in your code
   -f --file [file]     The full path of the manifest file, if no file is given we assume the file is in this folder
   -h, --help           output usage information
 
@@ -22,7 +22,7 @@ Commands:
 ## Add a new variable
 To add a new environmnt variable you can use the command
 ```
-$ tibcli-node manifest add-var -N DB_USER -T string -V admin
+$ tibcli-node manifest add-var -N DB_USER -T string -v admin
 ```
 Now you can use the variable `DB_USER` in your code and change it during or after deployment so you don't have to change all your code. In your code you can use
 ```
@@ -39,5 +39,5 @@ $ tibcli-node manifest rem-var -N DB_USER
 ## Using the file flag
 If you want to add or remove variables from a manifest file that isn't in the current directory, you can use the `-f` flag and specify the full path to the file. The **add a new variable** could have looked like
 ```
-$ tibcli-node manifest add-var -N DB_USER -T string -V admin -f /home/user/downloads/myapp/manifest.json
+$ tibcli-node manifest add-var -N DB_USER -T string -v admin -f /home/user/downloads/myapp/manifest.json
 ```
