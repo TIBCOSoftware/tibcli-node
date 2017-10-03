@@ -1,17 +1,18 @@
 # tibcli-node
 
 ![](https://travis-ci.org/TIBCOSoftware/tibcli-node.svg)
-![](https://img.shields.io/badge/release-v0.3.1-blue.svg)
+![](https://img.shields.io/badge/release-v0.4.0-blue.svg)
 ![](https://img.shields.io/badge/dependencies-up%20to%20date-green.svg)
 ![](https://img.shields.io/badge/license-BSD%20style-blue.svg)
 
 A command line tool to help developers with Node.js code on TIBCO Cloud Integration
 
 ## Install
-You can install by downloading the .tgz file from the releases folder
+You can install the package by using the npm commandline
 ```
-$ npm install -g tibcli-node-x.x.x.tgz
+$ npm install -g tibcli-node
 ```
+Alternatively, you can download the sources from this repo and build the tool yourself.
 
 ## Usage
 ```
