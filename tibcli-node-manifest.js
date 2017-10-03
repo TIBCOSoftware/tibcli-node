@@ -13,7 +13,7 @@ const path = require('path');
 cli
     .option('-N, --name <name>', 'The name of the variable to add or remove')
     .option('-T, --type <type>', 'The type of the variable to add')
-    .option('-V, --value <value>', 'The default value for the variable in the manifest, you still need to explicitly set the value in your code')
+    .option('-v, --value <value>', 'The default value for the variable in the manifest, you still need to explicitly set the value in your code')
     .option('-f --file [file]', 'The full path of the manifest file, if no file is given we assume the file is in this folder');
 
 cli

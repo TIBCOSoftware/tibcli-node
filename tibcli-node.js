@@ -11,7 +11,7 @@
 const cli = require('commander');
 
 cli
-    .version('0.4.0')
+    .version('0.4.1')
     .description('Help developers with Node.js code on TIBCO Cloud Integration')
     .command('generate', 'Generation of apps and deployment artifacts')
     .command('manifest', 'Manage manifest.json properties')

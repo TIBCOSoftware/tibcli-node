@@ -91,7 +91,7 @@ describe('tibcli-node-manifest.js', function() {
         expect(result.stdout).to.include('');
     });
     it('should fail when no manifest file is specified and no manifest can be found', () => {
-        let result = spawnSync('node', ['tibcli-node-manifest', 'add-var', '-N', 'bla', '-T', 'string', '-V', 'admin'], {encoding: 'utf-8'});
+        let result = spawnSync('node', ['tibcli-node-manifest', 'add-var', '-N', 'bla', '-T', 'string', '-v', 'admin'], {encoding: 'utf-8'});
         expect(result.stderr).to.include('Cannot find a manifest.json file in this folder!');
         expect(result.stdout).to.include('');
     });
@@ -139,7 +139,7 @@ describe('Generate app and update manifest', function() {
         expect(result.stderr).to.include('The manifest has no properties section!');
     });
     it('should successfully add a property', () => {
-        let result = spawnSync('node', ['../tibcli-node-manifest', 'add-var', '-N', 'myvar', '-T', 'string', '-V', 'admin'], {cwd: './testapp', encoding: 'utf-8'});
+        let result = spawnSync('node', ['../tibcli-node-manifest', 'add-var', '-N', 'myvar', '-T', 'string', '-v', 'admin'], {cwd: './testapp', encoding: 'utf-8'});
         expect(result.stdout).to.include('Successfully added environment variable from manifest.json!');
     });
     it('should successfully remove a property', () => {
