@@ -1,7 +1,7 @@
 # tibcli-node
 
 ![](https://travis-ci.org/TIBCOSoftware/tibcli-node.svg)
-![](https://img.shields.io/badge/release-v0.4.1-blue.svg)
+![](https://img.shields.io/badge/release-v0.5.0-blue.svg)
 ![](https://img.shields.io/badge/dependencies-up%20to%20date-green.svg)
 ![](https://img.shields.io/badge/license-BSD%20style-blue.svg)
 
@@ -16,22 +16,32 @@ Alternatively, you can download the sources from this repo and build the tool yo
 
 ## Usage
 ```
-Usage: tibcli-node [options] [command]
+ __   __ __          __ __                       __
+|  |_|__|  |--.----.|  |__|______.-----.-----.--|  |.-----.
+|   _|  |  _  |  __||  |  |______|     |  _  |  _  ||  -__|
+|____|__|_____|____||__|__|      |__|__|_____|_____||_____|
+                        The tibcli for Node.js apps, v0.5.0
 
-Help developers with Node.js code on TIBCO Cloud Integration
 
-Options:
+  Usage: tibcli-node [options] [command]
 
-  -V, --version  output the version number
-  -h, --help     output usage information
+  Help developers with Node.js apps on TIBCO Cloud Integration
 
-Commands:
 
-  generate    Generation of apps and deployment artifacts
-  manifest    Manage manifest.json properties
-  help [cmd]  display help for [cmd]
+  Options:
+
+    -V, --version  output the version number
+    -h, --help     output usage information
+
+
+  Commands:
+
+    create      create a new skeleton app in the chosen directory
+    package     package the app into a zip file to deploy
+    env         update the environment settings for the app
+    help [cmd]  display help for [cmd]
 ```
-For more detailed help check out the [generate](docs/generate.md) and [manifest](docs/manifest.md) pages.
+For more detailed help check out the [create](docs/create.md), [package](docs/package.md) and [env](docs/env.md) pages.
 
 ## Build and contribute
 You want to contribute to this tool? Awesome! Check out the [build and contribute](docs/build-and-contribute.md) page to get started

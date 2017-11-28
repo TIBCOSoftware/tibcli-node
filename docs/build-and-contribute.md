@@ -17,6 +17,5 @@ If you make changes, please be sure to update the test cases in `/test/test.js` 
 This project uses the Google style guide for JavaScript with some notable exceptions:
 * The linebreak style check is turned off
 * Switch colon spacing is turned off
-* Max line length is turned off
 
 To run the the linter and see if your code conforms to the standards execute `npm run-script linter`

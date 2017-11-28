@@ -1,0 +1,58 @@
+{
+    "version": "0.5.0",
+    "description": "Help developers with Node.js apps on TIBCO Cloud Integration",
+    "commands": {
+        "create": {
+            "name": "create",
+            "description": "create a new skeleton app in the chosen directory",
+            "parameters": {
+                "name":{
+                    "name": "--appname <name>",
+                    "description": "The name of the app"
+                },
+                "version":{
+                    "name": "--appversion <version>",
+                    "description": "the version of the app"
+                },
+                "git":{
+                    "name": "--use-git",
+                    "description": "initialize an empty git repo"
+                },
+                "github":{
+                    "name": "--use-github",
+                    "description": "create a new GitHub repo"
+                }
+            }
+        },
+        "package": {
+            "name": "package",
+            "description": "package the app into a zip file to deploy"
+        },
+        "env": {
+            "name": "env",
+            "description": "update the environment settings for the app",
+            "parameters": {
+                "name":{
+                    "name": "--varname <name>",
+                    "description": "the name of the environment variable"
+                },
+                "type":{
+                    "name": "--type <type>",
+                    "description": "the type of the environment variable"
+                },
+                "value":{
+                    "name": "--value <value>",
+                    "description": "the default value for the variable in the manifest"
+                }
+            }
+        },
+        "addvar": {
+            "name": "addvar",
+            "description": "add a new env variable"
+        },
+        "delvar": {
+            "name": "delvar",
+            "description": "delete an existing env variable"
+        }
+    }
+}

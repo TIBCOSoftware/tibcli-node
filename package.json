@@ -1,7 +1,7 @@
 {
   "name": "tibcli-node",
-  "version": "0.4.1",
-  "description": "Help developers with Node.js code on TIBCO Cloud Integration",
+  "version": "0.5.0",
+  "description": "Help developers with Node.js apps on TIBCO Cloud Integration",
   "main": "tibcli-node.js",
   "scripts": {
     "test": "mocha",
@@ -21,6 +21,8 @@
     "url": "https://github.com/TIBCOSoftware/tibcli-node"
   },
   "dependencies": {
+    "archiver": "^2.1.0",
+    "chalk": "^2.3.0",
     "commander": "^2.11.0",
     "fs-extra": "^4.0.1",
     "github": "^10.1.0",

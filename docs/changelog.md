@@ -1,4 +1,10 @@
 # Changelog
+## 0.5.0
+Changes in this version:
+* Rewrite of the commands to make sure they're in line with similar apps
+* Removed dependency on the operating system to zip files (now done by a Node.js module)
+* Added a cool welcome message
+
 ## 0.4.1
 Changes in this version:
 * Fixed a bug that would add the version as default value instead of the value provided when using the shorthand flag
