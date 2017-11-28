@@ -120,7 +120,7 @@ Push your Node.js app to TIBCO Cloud Integration and your apps on a world class 
 
 <div class="text-center hidden-sm">![](build/images/laptop.png)
 
-[<span>Install VSCode Extension</span>](https://github.com/TIBCOSoftware/vscode-extension-tci/releases) [<span>Install tibcli-node</span>](https://github.com/TIBCOSoftware/tibcli-node/releases)
+[<span>Install VSCode Extension</span>](https://github.com/TIBCOSoftware/vscode-extension-tci/releases) [<span>Install tibcli-node</span>](https://www.npmjs.com/package/tibcli-node)
 
 </div>
 
