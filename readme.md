@@ -1,9 +1,6 @@
 # tibcli-node
 
-![](https://travis-ci.org/TIBCOSoftware/tibcli-node.svg)
-![](https://img.shields.io/badge/release-v0.5.0-blue.svg)
-![](https://img.shields.io/badge/dependencies-up%20to%20date-green.svg)
-![](https://img.shields.io/badge/license-BSD%20style-blue.svg)
+[![Travis](https://img.shields.io/travis/TIBCOSoftware/tibcli-node.svg?style=flat-square)]() [![bitHound](https://img.shields.io/bithound/dependencies/github/TIBCOSoftware/tibcli-node.svg?style=flat-square)]() [![npm](https://img.shields.io/npm/v/tibcli-node.svg?style=flat-square)]() [![license](https://img.shields.io/github/license/TIBCOSoftware/tibcli-node.svg?style=flat-square)]()
 
 A command line tool to help developers with Node.js code on TIBCO Cloud Integration
 
