@@ -1,4 +1,8 @@
 # Changelog
+## 0.6.0
+Changes in this version:
+* Update dev dependencies
+
 ## 0.5.0
 Changes in this version:
 * Rewrite of the commands to make sure they're in line with similar apps
