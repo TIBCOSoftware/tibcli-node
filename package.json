@@ -25,7 +25,7 @@
     "chalk": "^2.4.1",
     "commander": "^2.16.0",
     "fs-extra": "^7.0.0",
-    "github": "^10.1.0",
+    "github": "^14.0.0",
     "simple-git": "^1.96.0"
   },
   "devDependencies": {
